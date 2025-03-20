@@ -722,7 +722,7 @@ src/
 ```
 
 
-This structure provides clear organization, making it easy for developers to locate files related to a specific feature.
+This structure provides clear organization, making it easy for developers to locate files related to a specific feature. And honestly, everyone working on the Frontend can be shipping at least a module(UI+Integration) in a day given the swagger is working endpoints are tested.
 
 At least in my opinion, no shades :)
 ```
