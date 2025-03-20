@@ -27,7 +27,7 @@ src/
 ├── assets/             # Static assets like images, fonts
 ├── components/         # Reusable UI components
 │   ├── common/         # Generic components used across modules
-│   ├── finance/        # Components specific to the finance module
+│   ├── sales/          # Components specific to the sales module
 │   ├── layout/         # Layout components (header, sidebar, etc.)
 │   └── ui/             # UI library components (shadcn implementations)
 ├── config/             # App configuration files
@@ -39,7 +39,7 @@ src/
 ├── pages/              # Page components, organized by module
 │   ├── auth/           # Authentication pages
 │   ├── dashboard/      # Dashboard pages
-│   └── finance/        # Finance module pages
+│   └── sales/          # Sales module pages
 ├── providers/          # Context providers
 │   ├── AuthProvider.tsx
 │   └── ThemeProvider.tsx
@@ -98,8 +98,8 @@ export interface Devise {
 // src/config/routes.ts
 export const ROUTES = {
   FINANCE: {
-    DEVISES: '/finance/devises',
-    TAUX_CHANGE: '/finance/taux-change',
+    DEVISES: '/sales/devises',
+    TAUX_CHANGE: '/sales/taux-change',
     // ...
   },
   // ...
@@ -171,10 +171,10 @@ const DeviseForm = () => {
 
 ### 3. State Management Modernization
 
-Transition from Redux to a combination of React Context and TanStack Query:
+Transition from Redux for server data to a combination of React Context and TanStack Query:
 
 ```typescript
-// Redux approach: Multiple files, complex setup
+// Redux approach: Multiple files, complex setup(Just an example)
 // store/actions/devise.js
 export const FETCH_DEVISES_REQUEST = 'FETCH_DEVISES_REQUEST';
 export const FETCH_DEVISES_SUCCESS = 'FETCH_DEVISES_SUCCESS';
@@ -300,7 +300,7 @@ export const AuthProvider = ({ children }) => {
 export const useAuth = () => useContext(AuthContext);
 ```
 
-#### Advantages of TanStack Query + Context over Redux
+#### Advantages of TanStack Query + Context
 
 1. **Reduced Boilerplate**: No need for actions, reducers, and middleware
 2. **Automatic Caching**: Built-in data caching with configurable stale times
@@ -352,12 +352,12 @@ export default defineConfig({
 });
 
 // ❌ Before: Relative imports
-import { DeviseForm } from '../../../../components/finance/DeviseForm';
+import { DeviseForm } from '../../../../components/sales/DeviseForm';
 import { useDevise } from '../../../hooks/useDevise';
 import { formatCurrency } from '../../../utils/format';
 
 // ✅ After: Absolute imports with aliases
-import { DeviseForm } from '@components/finance/DeviseForm';
+import { DeviseForm } from '@components/sales/DeviseForm';
 import { useDevise } from '@hooks/useDevise';
 import { formatCurrency } from '@utils/format';
 ```
@@ -645,7 +645,7 @@ src/
 
 ## State Management
 
-This project uses a combination of React Context API (for global UI state) and TanStack Query (for server state) instead of Redux. This provides several benefits:
+This project uses a combination of React Context API (for global UI state) and TanStack Query (for server state). This provides several benefits:
 
 - Simpler state management with less boilerplate
 - Built-in caching and data synchronization
@@ -690,32 +690,32 @@ For all forms in the application, use Formik combined with Yup for validation:
 
 ## Module Structure Example
 
-Example of a complete module structure (Finance module):
+Example of a very simple module structure (Sales module):
 
 
 ```
 src/
 ├── components/
-│   └── finance/
+│   └── sales/
 │       ├── DeviseForm.tsx
 │       ├── DeviseTable.tsx
 │       ├── TauxChangeForm.tsx
 │       └── TauxChangeTable.tsx
 ├── hooks/
-│   └── finance/
+│   └── sales/
 │       ├── useDevise.ts
 │       └── useTauxChange.ts
 ├── pages/
-│   └── finance/
+│   └── sales/
 │       ├── DevisesPage.tsx
 │       ├── TauxChangePage.tsx
 │       └── TauxChangeDetailsPage.tsx
 ├── services/
-│   └── finance/
+│   └── sales/
 │       ├── deviseService.ts
 │       └── tauxChangeService.ts
 └── types/
-    └── finance/
+    └── sales/
         ├── devise.ts
         ├── tauxChange.ts
         └── index.ts
